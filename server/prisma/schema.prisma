@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int            @id @default(autoincrement())
+  email         String         @unique
+  name          String?
+  role          String         @default("LECTURER")
+  teamsWebhook  String?
+  deadlines     Deadline[]
+  notifications Notification[]
+  documents     Document[]
+
+  @@map("user")
+}
+
+model Deadline {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  dueDate     DateTime
+  lecturerId  Int
+  lecturer    User     @relation(fields: [lecturerId], references: [id])
+
+  @@map("deadline")
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  message   String
+  type      String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@map("notification")
+}
+
+model Document {
+  id             Int      @id @default(autoincrement())
+  type           String   // เช่น "TQF3", "TQF5"
+  courseCode     String   // รหัสวิชา เช่น CS301
+  courseName     String   // ชื่อวิชา
+  semester       Int      // ภาคเรียน
+  academicYear   String   // ปีการศึกษา
+  
+  // ส่วนสำคัญ: เก็บข้อมูลที่กรอกในฟอร์มทั้งหมดเป็น JSON
+  content        Json     
+  
+  status         String   @default("DRAFT") // DRAFT, SUBMITTED, APPROVED
+  
+  userId         Int
+  user           User     @relation(fields: [userId], references: [id])
+  
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("document")
+}
