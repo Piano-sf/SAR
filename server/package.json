@@ -1,10 +1,13 @@
 {
-  "name": "server",
+  "name": "qa-document-server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Backend API & Automated Reminder Service for QA Document Management System",
+  "main": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npx tsx watch src/index.ts",
+    "start": "npx tsx src/index.ts",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate dev"
   },
   "keywords": [],
   "author": "",

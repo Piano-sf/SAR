@@ -2,11 +2,11 @@ import nodemailer from 'nodemailer';
 import axios from 'axios';
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
+    host: process.env.SMTP_HOST || 'smtp.ethereal.email',
+    port: Number(process.env.SMTP_PORT) || 587,
     auth: {
-        user: 'stanley.schaefer0@ethereal.email',
-        pass: 'gQg3RjkSAqDkgpPQNg'
+        user: process.env.EMAIL_USER || '',
+        pass: process.env.EMAIL_PASS || ''
     }
 });
 
