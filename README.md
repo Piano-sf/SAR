@@ -1,113 +1,46 @@
-<<<<<<< HEAD
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-=======
 # QA Document Management System (SAR) — ระบบบริหารจัดการเอกสารประกันคุณภาพการศึกษาและแจ้งเตือนกำหนดส่งอัตโนมัติ
 
 > **ประเภทโครงงาน:** โครงงานปริญญาตรี (Senior Project)  
-> **ขอบเขตระบบ:** Full-Stack Web Application (React 19 + Express 5 + Prisma ORM + MySQL + Real-time Socket.io)
+> **ขอบเขตระบบ:** Full-Stack Web Application (React 19 + TypeScript + Tailwind CSS v4 + Supabase / Express 5 + Prisma ORM + MySQL + Multi-Channel Notification)
 
-**QA Document Management System** คือระบบเว็บแอปพลิเคชันแบบ Full-Stack สำหรับบริหารจัดการงานประกันคุณภาพการศึกษาภายในคณะ/มหาวิทยาลัย ช่วยให้อาจารย์และเจ้าหน้าที่สามารถจัดทำ ส่งตรวจ และติดตามสถานะเอกสารมาตรฐานคุณวุฒิระดับอุดมศึกษา (**มคอ.3 / TQF3**, **มคอ.5 / TQF5**) และผลงานทางวิชาการได้ในที่เดียว พร้อมระบบแจ้งเตือนกำหนดส่งงานอัตโนมัติแบบหลายช่องทาง (**In-App Real-time Notification, Email และ Microsoft Teams Webhook**)
+**QA Document Management System (SAR)** คือระบบเว็บแอปพลิเคชันสำหรับบริหารจัดการงานประกันคุณภาพการศึกษาภายในคณะและมหาวิทยาลัย ช่วยให้อาจารย์ หัวหน้าภาควิชา ผู้บริหาร และเจ้าหน้าที่สามารถจัดทำ อัปโหลด ส่งตรวจ และติดตามสถานะเอกสารมาตรฐานคุณวุฒิระดับอุดมศึกษา (**มคอ.3 / TQF3**, **มคอ.5 / TQF5**) รวมถึงบันทึกและคำนวณค่าน้ำหนัก **ผลงานทางวิชาการ (Academic Portfolio)** ได้ในที่เดียว พร้อมระบบแจ้งเตือนกำหนดส่งงานอัตโนมัติแบบหลายช่องทาง (**In-App Real-time Notification, Email และ Microsoft Teams Adaptive Card Webhook**)
 
 ---
 
 ## จุดเด่นของระบบ (Key Features)
 
-- **ระบบจัดทำและบริหารจัดการเอกสาร มคอ. (TQF3 / TQF5 & Academic Works)**:
-  - แบบฟอร์มกรอกข้อมูลเอกสาร **มคอ.3 (TQF3)**, **มคอ.5 (TQF5)** และผลงานทางวิชาการ (`AcademicWorkForm`) แบบโครงสร้าง JSON ที่ยืดหยุ่นต่อการปรับเปลี่ยนหมวดหมู่ตามเกณฑ์ประกันคุณภาพ
-  - รองรับการบันทึกฉบับร่าง (`DRAFT`), ส่งตรวจ (`SUBMITTED`), ตรวจสอบพรีวิวเอกสาร (`DocumentPreview`) และระบบอนุมัติเอกสารสำหรับผู้ดูแล (`APPROVED` ผ่านหน้า `AdminApproval`)
-- **ระบบแจ้งเตือนกำหนดส่งอัตโนมัติหลายช่องทาง (Multi-Channel Automated Reminder)**:
-  - ใช้ `node-cron` ตรวจสอบกำหนดส่งเอกสาร (`Deadline`) ของอาจารย์แต่ละท่านตามตารางเวลาอัตโนมัติ
-  - แจ้งเตือนพร้อมกัน 3 ช่องทาง:
-    1. **Real-time Web Notification** ผ่าน `Socket.io` แสดงผลบนหน้าจอทันทีโดยไม่ต้องรีเฟรช
-    2. **Email Notification** ผ่าน `Nodemailer` (SMTP)
-    3. **Microsoft Teams Notification** ยิงข้อความเข้าแชนเนลหรือแชตผ่าน Incoming Webhook
-- **แดชบอร์ดสรุปภาพรวมสำหรับผู้บริหารและผู้ดูแล (QA Analytics Dashboard)**:
-  - แสดงสถิติการส่งเอกสาร สถานะความคืบหน้าของแต่ละรายวิชา/ภาคการศึกษา และการจัดการรายชื่อบุคลากร (`UserList`, `DeadlineSettings`) ด้วยกราฟจาก `Recharts`
+- **ระบบแดชบอร์ดแยกตามบทบาทผู้ใช้งาน (Role-Based Dashboards)**:
+  - **สำหรับผู้บริหาร (`ExecutiveDash`)**: แสดงภาพรวม KPI เฉลี่ยของคณะ สถานะการส่งเอกสาร มคอ.3 และ มคอ.5 แยกตามภาควิชา (เช่น คอมพิวเตอร์, ไฟฟ้า, โลจิสติกส์) กราฟแท่งเปรียบเทียบคะแนนผลงานทางวิชาการรายภาควิชา และการจัดอันดับอาจารย์ที่มีคะแนน KPI สูงสุด (**Top 5 Excellence**)
+  - **สำหรับหัวหน้าภาควิชา (`DepartmentOverview`)**: ติดตามความคืบหน้าการส่งเอกสารและผลงานวิจัยของอาจารย์ภายในสาขาวิชา
+  - **สำหรับอาจารย์ผู้สอน (`LecturerDash`)**: สรุปภาระงานสอน สถานะเอกสารที่ค้างส่ง และกำหนดการสำคัญที่ใกล้ถึงกำหนด
+  - **สำหรับผู้ดูแลระบบ (`AdminDash`)**: จัดการข้อมูลหลักสูตร รายวิชา การลงทะเบียนอาจารย์ และปฏิทินกำหนดส่งงานทั้งคณะ
+- **ระบบจัดการเอกสาร มคอ.3 และ มคอ.5 (`TqfManagement`)**:
+  - ดึงรายวิชาที่อาจารย์รับผิดชอบมาสร้างรายการติดตามสถานะเอกสาร **มคอ.3 (ก่อนเปิดเทอม)** และ **มคอ.5 (หลังปิดเทอม)** โดยอัตโนมัติ
+  - รองรับการอัปโหลดไฟล์ PDF เก็บใน **Supabase Storage (`tqf_submissions`)**, การบันทึกเป็นฉบับร่าง (`draft`), การส่งเอกสารขั้นสุดท้าย (`submitted`) พร้อมล็อกการแก้ไขหลังส่ง และการเปิดดูพรีวิวเอกสารทันที
+- **ระบบแฟ้มสะสมผลงานทางวิชาการและคำนวณค่าน้ำหนัก (`AcademicPortfolio`)**:
+  - บันทึกผลงานวิจัย บทความวิชาการ สิทธิบัตร ตำรา และงานสร้างสรรค์ พร้อมคำนวณ **ค่าน้ำหนักคุณภาพผลงาน (`0.20` – `1.00`)** ตามเกณฑ์มาตรฐาน ก.พ.อ. และ TCI อัตโนมัติ
+  - รองรับการแนบไฟล์หลักฐาน PDF (`academic_files`) และกรองดูคะแนนรวมแยกตามปีที่เผยแพร่
+- **ระบบนำเข้าข้อมูลรายวิชาด้วยไฟล์ Excel (`CoursePage` & SheetJS `xlsx`)**:
+  - ผู้ดูแลระบบสามารถดาวน์โหลดเทมเพลตมาตรฐาน (`QA_Course_Template.xlsx`) และอัปโหลดไฟล์ Excel เพื่อเพิ่มรายวิชาและผูกความสัมพันธ์ระหว่างรายวิชากับอาจารย์ผู้สอน (`course_instructors`) แบบกลุ่ม (Bulk Upsert & Mapping ด้วยอีเมล)
+- **ระบบปฏิทินกำหนดการและแจ้งเตือนอัตโนมัติหลายช่องทาง (Multi-Channel Automated Reminder)**:
+  - จัดการกำหนดส่งงาน (`CalendarPage` / `Deadline`) แยกตามสถานะ (**เลยกำหนด**, **ใกล้ถึงกำหนด 7 วัน**, **ยังไม่ถึงกำหนด**) และประเภทงาน (เอกสาร มคอ., งานวิจัย, การเสนอชื่อรางวัล)
+  - ส่งการแจ้งเตือนอัตโนมัติผ่าน **Email** (`EmailJS` / `Nodemailer` SMTP), **Microsoft Teams Incoming Webhook** (ในรูปแบบ `AdaptiveCard`) และ **Real-time WebSocket** (`Socket.io` + `node-cron`)
 
 ---
 
 ## เทคโนโลยีที่ใช้ (Tech Stack)
 
-### Frontend (`client/`)
-- **Framework**: React 19, Vite, React Router v7
-- **Styling & Icons**: Tailwind CSS v4, Lucide React, React Icons
-- **Data Visualization & Real-time**: Recharts, Socket.io Client, Axios
+### 1. ส่วนหน้าบ้านและคลาวด์แพลตฟอร์ม (`src/` — React 19 + TypeScript + Supabase)
+- **Framework & Language**: React 19 (`^19.2.5`), TypeScript (`~6.0.2`), Vite 8, React Router v7
+- **State Management**: Zustand (`useUserStore` สำหรับจัดการสิทธิ์และข้อมูลผู้ใช้)
+- **Backend-as-a-Service & Storage**: Supabase (`@supabase/supabase-js` — PostgreSQL Database, Auth & Storage Buckets)
+- **Styling & Motion**: Tailwind CSS v4, Framer Motion, Lucide React, React Calendar
+- **Excel Processing & Notifications**: SheetJS (`xlsx` สำหรับนำเข้า/ส่งออกไฟล์ Excel), EmailJS (`@emailjs/browser`), MS Teams Adaptive Card Webhook
 
-### Backend (`server/`)
-- **Runtime & Framework**: Node.js, Express 5 (TypeScript)
+### 2. ส่วนบริการหลังบ้านและระบบแจ้งเตือนตามตารางเวลา (`server/` & `client/` — Express 5 + Prisma + Socket.io)
+- **Runtime & Web Framework**: Node.js, Express 5 (TypeScript)
 - **Database & ORM**: MySQL, Prisma ORM (`@prisma/client`)
-- **Real-time & Background Jobs**: Socket.io, Node-Cron (`node-cron`)
+- **Real-time & Background Scheduler**: Socket.io (`^4.8.3`), Node-Cron (`node-cron` ใน `reminderJob.ts`)
 - **Integrations & Security**: Nodemailer (SMTP Email), Axios (MS Teams Webhook), JWT (`jsonwebtoken`), Bcrypt.js
 
 ---
@@ -115,35 +48,38 @@ export default defineConfig([
 ## สถาปัตยกรรมระบบ (System Architecture)
 
 ```mermaid
-flowchart LR
-    subgraph Client ["Frontend (React 19 + Tailwind v4)"]
-        UI["Dashboard / TQF Form / Admin Approval"]
-        SC["Socket.io Client"]
+flowchart TB
+    subgraph Users ["บทบาทผู้ใช้งาน (Role-Based Access)"]
+        LEC["อาจารย์ผู้สอน (Lecturer)"]
+        HEAD["หัวหน้าภาควิชา (Department Head)"]
+        EXEC["ผู้บริหารคณะ (Executive)"]
+        ADM["ผู้ดูแลระบบ (Admin / Staff)"]
     end
 
-    subgraph Server ["Backend (Express 5 + TypeScript)"]
-        API["REST API (/api/documents, /api/notifications)"]
-        CRON["Cron Scheduler (reminderJob.ts)"]
-        NOTI["Notification Service"]
+    subgraph Frontend ["Frontend Application (React 19 + TypeScript + Tailwind v4)"]
+        DASH["Role-Based Dashboards\n(Lecturer / Dept / Executive / Admin)"]
+        TQF["TQF Management\n(มคอ.3 / มคอ.5 PDF Upload)"]
+        PORT["Academic Portfolio\n(คำนวณค่าน้ำหนัก 0.20 - 1.00)"]
+        XLS["Course & Instructor Admin\n(SheetJS Excel Bulk Import)"]
+        CAL["Calendar & Deadlines\n(ติดตามสถานะกำหนดส่ง)"]
     end
 
-    subgraph Database ["Database (MySQL + Prisma)"]
-        DB[("User / Document / Deadline / Notification")]
+    subgraph Backend ["Data, Storage & Notification Services"]
+        SUPA[("Supabase PostgreSQL\n& Storage Buckets")]
+        EXP["Express 5 + Prisma ORM\n+ Node-Cron + Socket.io"]
     end
 
-    subgraph External ["External Channels"]
-        SMTP["SMTP Email Server"]
-        TEAMS["Microsoft Teams Webhook"]
+    subgraph Channels ["Multi-Channel Notifications"]
+        MAIL["Email Notification\n(EmailJS / Nodemailer SMTP)"]
+        TEAMS["Microsoft Teams\n(Adaptive Card Webhook)"]
+        WS["Real-time In-App Alert\n(Socket.io)"]
     end
 
-    UI -- "HTTP REST (Axios)" --> API
-    API -- "Prisma Client" --> DB
-    CRON -- "ตรวจสอบกำหนดส่ง (Deadline)" --> DB
-    CRON --> NOTI
-    NOTI -- "1. บันทึกแจ้งเตือน" --> DB
-    NOTI -- "2. Real-time Event" --> SC
-    NOTI -- "3. ส่งอีเมล" --> SMTP
-    NOTI -- "4. ส่งแจ้งเตือนเข้าทีม" --> TEAMS
+    Users --> DASH
+    DASH --> TQF & PORT & XLS & CAL
+    TQF & PORT & XLS & CAL <--> SUPA
+    CAL & TQF <--> EXP
+    TQF & EXP --> MAIL & TEAMS & WS
 ```
 
 ---
@@ -152,47 +88,44 @@ flowchart LR
 
 ```text
 SAR/
-├── client/                              # ส่วนหน้าบ้าน (React 19 + Vite)
-│   ├── src/
-│   │   ├── components/                  # คอมโพเนนต์ส่วนกลาง (Navbar, Sidebar ฯลฯ)
-│   │   ├── layouts/                     # โครงหน้าเว็บหลัก (Main Layout)
-│   │   ├── pages/                       # หน้าจอทั้งหมดของระบบ
-│   │   │   ├── Dashboard.jsx            # หน้าแดชบอร์ดสรุปภาพรวมการส่งเอกสาร
-│   │   │   ├── TQFForm.jsx              # แบบฟอร์มจัดทำเอกสาร มคอ.3 / มคอ.5
-│   │   │   ├── AcademicWorkForm.jsx     # แบบฟอร์มบันทึกผลงานทางวิชาการ
-│   │   │   ├── DocumentList.jsx         # รายการเอกสารและสถานะ
-│   │   │   ├── DocumentPreview.jsx      # หน้าแสดงตัวอย่างเอกสารก่อนพิมพ์/อนุมัติ
-│   │   │   ├── AdminApproval.jsx        # หน้าตรวจสอบและอนุมัติเอกสารสำหรับผู้ดูแล
-│   │   │   ├── DeadlineSettings.jsx     # หน้าตั้งค่ากำหนดส่งเอกสาร (Deadlines)
-│   │   │   ├── NotificationList.jsx     # หน้าประวัติการแจ้งเตือน
-│   │   │   └── UserList.jsx             # หน้าจัดการข้อมูลอาจารย์และบุคลากร
-│   │   └── App.jsx                      # ตั้งค่า Routing ของระบบ
-│   └── package.json
-├── server/                              # ส่วนหลังบ้าน (Express 5 + Prisma + Socket.io)
+├── src/                                     # แอปพลิเคชันหลัก (React 19 + TypeScript + Supabase)
+│   ├── lib/
+│   │   ├── supabase.ts                      # ตั้งค่าการเชื่อมต่อ Supabase Client & Storage
+│   │   └── emailService.ts                  # บริการส่งอีเมลแจ้งเตือน
+│   ├── pages/
+│   │   ├── Admin/
+│   │   │   ├── CoursePage.tsx               # จัดการรายวิชา + นำเข้า/ส่งออกเทมเพลต Excel (xlsx)
+│   │   │   ├── InstructorPage.tsx           # จัดการข้อมูลและสิทธิ์อาจารย์ผู้สอน
+│   │   │   ├── CalendarPage.tsx             # ปฏิทินกำหนดส่งงานและวิเคราะห์ความคืบหน้า
+│   │   │   ├── ProfilePage.tsx              # จัดการโปรไฟล์และตั้งค่า MS Teams Webhook
+│   │   │   └── LoginPage.tsx                # หน้าเข้าสู่ระบบ
+│   │   ├── Auth/
+│   │   │   └── ResetPassword.tsx            # หน้าตั้งค่ารหัสผ่านใหม่
+│   │   ├── Dashboard/
+│   │   │   ├── AdminDash.tsx                # แดชบอร์ดสำหรับผู้ดูแลระบบ
+│   │   │   ├── LecturerDash.tsx             # แดชบอร์ดสำหรับอาจารย์ผู้สอน
+│   │   │   ├── DepartmentOverview.tsx       # แดชบอร์ดภาพรวมระดับภาควิชา
+│   │   │   ├── Executivedash.tsx            # แดชบอร์ดผู้บริหาร (KPI, กราฟภาควิชา, Top 5)
+│   │   │   └── Lecturerlayout.tsx           # โครงหน้าเว็บและเมนูนำทางสำหรับอาจารย์/ผู้บริหาร
+│   │   ├── TqfManagement.tsx                # ระบบส่งและจัดการไฟล์เอกสาร มคอ.3 และ มคอ.5
+│   │   └── AcademicPortfolio.tsx            # ระบบบันทึกผลงานทางวิชาการและคำนวณค่าน้ำหนักคะแนน
+│   ├── routes/
+│   │   ├── AppRouter.tsx                    # ระบบจัดการเส้นทาง (Public & Role-Protected Routes)
+│   │   └── ProtectedRoute.tsx               # ตรวจสอบสิทธิ์การเข้าถึงตามบทบาท (Role Guard)
+│   └── stores/
+│       └── useUserStore.ts                  # Zustand Store จัดเก็บสถานะผู้ใช้ที่ล็อกอิน
+├── server/                                  # บริการ Backend API & Cron Reminder (Express 5 + Prisma)
 │   ├── prisma/
-│   │   └── schema.prisma                # โครงสร้างตารางฐานข้อมูล (User, Document, Deadline, Notification)
-│   ├── src/
-│   │   ├── index.ts                     # จุดเริ่มต้นเซิร์ฟเวอร์ Express & Socket.io
-│   │   ├── routes/
-│   │   │   └── documentRoutes.ts        # API Routes สำหรับจัดการเอกสาร
-│   │   ├── jobs/
-│   │   │   └── reminderJob.ts           # Cron Job ตรวจสอบกำหนดส่งและส่งแจ้งเตือนอัตโนมัติ
-│   │   └── services/
-│   │       └── notificationService.ts   # บริการส่ง Email (Nodemailer) และ MS Teams Webhook
-│   ├── .env.example                     # ตัวอย่างไฟล์ตั้งค่า Environment Variables
-│   └── package.json
-└── README.md                            # เอกสารอธิบายโปรเจค
+│   │   └── schema.prisma                    # โครงสร้างตารางฐานข้อมูล (User, Document, Deadline, Notification)
+│   └── src/
+│       ├── index.ts                         # จุดเริ่มต้นเซิร์ฟเวอร์ Express & Socket.io
+│       ├── routes/documentRoutes.ts         # REST API สำหรับจัดการเอกสารและการแจ้งเตือน
+│       ├── jobs/reminderJob.ts              # Cron Job ตรวจสอบกำหนดส่งและส่งแจ้งเตือนอัตโนมัติ
+│       └── services/notificationService.ts  # บริการส่ง Email (Nodemailer) และ MS Teams Webhook
+├── client/                                  # โมดูลลูกข่ายสำหรับเชื่อมต่อกับ Express Server
+├── package.json
+└── README.md
 ```
-
----
-
-## โครงสร้างฐานข้อมูล (Database Schema)
-
-ฐานข้อมูล MySQL ดูแลผ่าน **Prisma ORM** ([`server/prisma/schema.prisma`](server/prisma/schema.prisma)) ประกอบด้วย 4 ตารางหลัก:
-1. **`User` (`user`)**: ข้อมูลผู้ใช้งาน (`email`, `name`, `role` เช่น `LECTURER` / `ADMIN`, และ `teamsWebhook`)
-2. **`Document` (`document`)**: ข้อมูลเอกสารประกันคุณภาพ (`type` เช่น `TQF3`/`TQF5`, `courseCode`, `courseName`, `semester`, `academicYear`, `content` แบบ JSON, และ `status`: `DRAFT` | `SUBMITTED` | `APPROVED`)
-3. **`Deadline` (`deadline`)**: กำหนดส่งเอกสารแต่ละรายการ (`title`, `description`, `dueDate`, ผูกกับอาจารย์ผู้รับผิดชอบ)
-4. **`Notification` (`notification`)**: ประวัติการแจ้งเตือนในระบบ (`message`, `type`, `isRead`, `createdAt`)
 
 ---
 
@@ -200,46 +133,44 @@ SAR/
 
 ### สิ่งที่ต้องเตรียมล่วงหน้า (Prerequisites)
 - **Node.js** (เวอร์ชัน 18 ขึ้นไป)
-- **MySQL Server** สำหรับเก็บข้อมูลระบบ
+- โปรเจค **Supabase** (หรือ **MySQL Server** หากต้องการรันคู่กับโฟลเดอร์ `server/`)
 
-### 1. โคลนโปรเจคและติดตั้งแพ็กเกจทั้งหมด
+### 1. โคลนโปรเจคและติดตั้งแพ็กเกจ
 ```bash
 git clone https://github.com/Piano-sf/SAR.git
 cd SAR
-npm run install:all
+npm install
 ```
 
-### 2. ตั้งค่า Environment Variables ของฝั่ง Server
-คัดลอกไฟล์ตัวอย่าง `server/.env.example` ไปเป็น `server/.env` และแก้ไขค่าการเชื่อมต่อฐานข้อมูล MySQL และ SMTP:
+### 2. ตั้งค่า Environment Variables
+สร้างไฟล์ `.env` ที่โฟลเดอร์รากของโปรเจค (`SAR/.env`) สำหรับเชื่อมต่อกับ Supabase และ EmailJS:
+```env
+VITE_SUPABASE_URL=https://your-project-id.supabase.co
+VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
+VITE_EMAILJS_SERVICE_ID=your-emailjs-service-id
+VITE_EMAILJS_TEMPLATE_ID=your-emailjs-template-id
+VITE_EMAILJS_PUBLIC_KEY=your-emailjs-public-key
+```
+
+### 3. รันแอปพลิเคชันหลัก (Development Mode)
+```bash
+npm run dev
+```
+เปิดเบราว์เซอร์ไปที่ `http://localhost:5173`
+
+### 4. การรันบริการ Backend Cron Server เพิ่มเติม (ทางเลือก — โฟลเดอร์ `server/`)
+หากต้องการรันเซิร์ฟเวอร์ `Express 5 + Prisma + Node-Cron` ในโฟลเดอร์ `server/` คู่กัน:
 ```bash
 cp server/.env.example server/.env
-```
-
-| ตัวแปร | คำอธิบาย |
-| :--- | :--- |
-| `DATABASE_URL` | Connection String ของฐานข้อมูล MySQL (เช่น `mysql://root:password@localhost:3306/qa_document_db`) |
-| `PORT` | พอร์ตของฝั่ง Backend API (ค่าเริ่มต้น `3001`) |
-| `SMTP_HOST` / `SMTP_PORT` | โฮสต์และพอร์ตของเซิร์ฟเวอร์อีเมลสำหรับการแจ้งเตือน |
-| `EMAIL_USER` / `EMAIL_PASS` | บัญชีอีเมลและรหัสผ่าน (App Password) สำหรับส่งแจ้งเตือน |
-
-### 3. สร้างตารางฐานข้อมูลด้วย Prisma
-```bash
 cd server
+npm install
 npm run prisma:generate
 npm run prisma:migrate
-cd ..
+npm run dev
 ```
 
-### 4. เริ่มรันระบบ (Frontend + Backend)
-เปิดเทอร์มินัล 2 หน้าต่างเพื่อรันฝั่ง Server และฝั่ง Client:
+---
 
-**เทอร์มินัลที่ 1 (Backend API & Socket.io — พอร์ต `3001`):**
-```bash
-npm run dev:server
-```
+## ผู้พัฒนา (Author)
 
-**เทอร์มินัลที่ 2 (Frontend React — พอร์ต `5173`):**
-```bash
-npm run dev:client
->>>>>>> 827d24619f97ddbfad463576bc42734a7ccb3de5
-```
+- **สวิตตา ฟุ้งลัดดา (Sawitta Fungladda)** — [@Piano-sf](https://github.com/Piano-sf) | [Portfolio](https://piano-sf.github.io/Portfolio/)
